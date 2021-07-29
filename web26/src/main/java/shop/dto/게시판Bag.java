@@ -1,7 +1,7 @@
 package shop.dto;
 
 public class 게시판Bag {
-
+	private String id;
 	private String title;
 	private String writer;
 	private String content;
@@ -20,6 +20,12 @@ public class 게시판Bag {
 	}
 	public String getContent() {
 		return content;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public void setContent(String content) {
 		this.content = content;

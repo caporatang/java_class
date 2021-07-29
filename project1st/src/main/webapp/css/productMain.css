@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+
+li{
+	list-style: none;
+	float: left;
+	font-size: 16px;
+	padding: 10px; /* 글자와 백그라드 색의 거리 */
+	margin: 5px; /* li와 li의 거리 */
+}

@@ -1,38 +1,21 @@
+<%@page import="java.awt.FileDialog"%>
 <%@page import="Product.productDAO"%>
-<%@page import="Product.productDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Product.productDAO"%>
+<%@page import="Product.ProductDTO"%>
 <%@page import="javax.swing.JOptionPane"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
     <%
+        //test
+      
+            
+            
     
-    String productNum = JOptionPane.showInputDialog("고기");
-    String productPic = JOptionPane.showInputDialog("사");
-    String productName = JOptionPane.showInputDialog("상품명");
-   	String productPrice = JOptionPane.showInputDialog("가격");
-    String productWeight = JOptionPane.showInputDialog("중량");
-    String productOrigin = JOptionPane.showInputDialog("원산지");
-    
-    
-    
-    productDTO dt = new productDTO();
-	int price = Integer.parseInt(productPrice);
-    dt.setProductName(productName);
-   	dt.setProductPic(productPic);
-	dt.setProductNum(productNum);
-	dt.setProductOrigin(productOrigin);
-	dt.setProductPrice(productPrice);
-	dt.setProductWeight(productWeight);
-
-	productDAO da = new productDAO();
-	da.create(dt);
-	
-	
-    
-
-    
-    
-    %>
+        	
+        	
+        %>
     
     
     
@@ -44,6 +27,35 @@
 <title>Insert title here</title>
 </head>
 <body>
-전송 완료
+
+	<div id="total">
+		<div id="top">
+			
+			
+		</div>
+		<div id="top2">
+		
+
+		</div>
+		<div id="center">
+			<form action="test2.jsp">
+				상품번호: <input name="productNum"><br> 
+				사진: <<input type = "file" name ="kmeet2.png"><br>
+				상품명: <input name="productName"><br> 
+				금액: <input name="productPrice"><br>
+				상품 중량: <input name="productWeight"><br>
+				원산지: <input name="productOrigin"><br>
+				<button>create 처리</button>
+			</form>
+			<form action="kmeet.jsp">
+				<button>미소 한우 보기</button>
+			<!-- file : <input type ="file" name= -->
+			</form>
+
+
+		</div>
+	</div>
+
+
 </body>
 </html>

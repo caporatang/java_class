@@ -25,6 +25,14 @@
 				<button>게시판 글쓰기 처리</button>
 			</form>
 	
+	
+	
+			<h3>게시판 하나 검색</h3>
+			<form action="read2.jsp"> <!-- 여기서 입력한거 insert.jsp로 받아줘. -->
+				ID: <input name="id"><br> 
+				<button>게시판 하나 검색처리</button>
+			</form>
+		
 	</div>
 </div>
 

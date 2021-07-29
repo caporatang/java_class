@@ -1,3 +1,4 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.If"%>
 <%@page import="shop.dto.회원bag2"%>
 <%@page import="shop.db.회원DAO2"%>
 <%@page import="shop.dto.회원bag"%>
@@ -21,10 +22,12 @@
     bag.setTel(tel);
     
     회원DAO2 dao = new 회원DAO2();
-    dao.create(bag);
-
+    	int result = dao.create(bag); // result 에 성공(1) 실패(0)이 들어있을것이다
+	String text = "회원 가입 실패했습니다. 재가입 해주세요";
+    	if(result == 1){
+    		text = "회원 가입 성공했습니다. 축하드립니다";
+    	}
     %>
-    
     
     
 <!DOCTYPE html>
@@ -34,6 +37,7 @@
 <title>Insert title here</title>
 </head>
 <body bgcolor="yellow">
-전송된 회원 정보의 sql문을 전송함 
+실행 결과는 <%= text %>
+
 </body>
 </html>
