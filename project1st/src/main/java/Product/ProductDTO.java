@@ -47,6 +47,12 @@ public class ProductDTO {
 	public void setProductOrigin(String productOrigin) {
 		this.productOrigin = productOrigin;
 	}
+	@Override
+	public String toString() {
+		return "ProductDTO [productNum=" + productNum + ", productPic=" + productPic + ", productName=" + productName
+				+ ", productPrice=" + productPrice + ", productWeight=" + productWeight + ", productOrigin="
+				+ productOrigin + "]";
+	}
 
 	
 }
