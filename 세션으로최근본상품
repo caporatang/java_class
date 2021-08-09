@@ -1,0 +1,181 @@
+<%@page import="Product.ProductDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Product.productDAO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%
+productDAO dao = new productDAO();
+String id = request.getParameter("id");
+ArrayList<ProductDTO> list = dao.read(id);
+
+// 최근 본 상품 세션 띄우기
+productDAO dao2 = new productDAO();
+String id2 = request.getParameter("id2"); // 상세페이지를 클릭할떄 db에서 read 해올때 쓰는 상품넘버를 파라미터로 받아온다.
+
+ArrayList<ProductDTO> list2 = dao.read(id); 
+String add = request.getRequestURI(); // 상품 상세 페이지 경로를 받아오자
+
+String add1 = add+"?id="+id; // 주소를 만들어주자 받아온 url의 경로 /project1_00/kMeetInfo0.jsp?id=BLB0036
+
+
+String pic = list.get(0).getProductPic(); // id값으로 읽어온 레코드중에 사진을 변수에 저장 해주자.
+
+ArrayList<String> first = new ArrayList<String>(); // 새로운 String 배열을 생성한다
+first.add(pic); // 배열에 넣자
+session.setAttribute("first", first); // 배열을 세션으로 잡아준다.
+ArrayList first1 = (ArrayList)session.getAttribute("first"); // 잡힌 세션을 arraylist로 가져와서 first1에 넣는다.
+
+ 
+%>
+
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- icon Style -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- swiper Style -->
+    <link rel="stylesheet"href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <!-- common Style -->
+    <link rel="stylesheet" href="css/style.css">
+    <Link rel="stylesheet" href="css/default.css">
+	<Link rel="stylesheet" href="css/infoStyle.css">
+    <!-- jquery CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+		    <script type="text/javascript">
+			var count = 1;
+		
+			function add() {
+				num = document.getElementById("num");
+				count++;
+				count2 = parseInt(count);
+				num.value = count2;
+		
+				if (num.value > 9) {
+					result = '1회 구매갯수 제한은 9개입니다'
+					num.value = 9
+					alert(result)
+				}
+			}
+			function minus() {
+				num = document.getElementById("num");
+				count--;
+				count2 = parseInt(count);
+				num.value = count2;
+		
+				if (num.value <= 0) {
+					result = '1개 이상부터 구매 가능합니다'
+					num.value = 1
+					alert(result)
+				}
+			}
+			
+			
+			
+			function addBasket() {
+				alert('장바구니에 물건을 담았습니다.')
+			}
+		</script>
+		<script type="text/javascript">
+		$(function(){
+			
+			function change_href() {
+				var count = $('#num').val();
+				var address= "basket.jsp?id=<%=list.get(0).getProductNum()%>&name=<%=list.get(0).getProductName()%>&price=<%=list.get(0).getProductPrice()%>&count="+count;
+				console.log(address);
+				$('.btns>a').attr("href", address);
+			}
+			
+			$('#ad').click(function(e){
+				e.preventDefault();
+				change_href();
+			});
+			
+			$('#mi').click(function(e){
+				e.preventDefault();
+				change_href();
+			});
+		
+		})
+		</script>
+				
+		<title><%=list.get(0).getProductName()%></title>
+</head>
+<body>
+    <div id="wrap">
+    	<!-- header 건들지마시오 -->
+        <jsp:include page="header.jsp"></jsp:include>
+        <div id="contents">
+			<div class="container">
+				<div class="product_view">
+					<h2><%=list.get(0).getProductName()%></h2>
+
+					<div class="recent_product">
+						<ul>
+							<%
+							for (int i = 0; i < first1.size(); i++) {
+							%>
+							<li><a href="<%=first1.get(i)%>">
+									<img src="./img/<%=first1.get(i)%>"> <!-- width = 100px; height=100px; --></a></li>
+							<%}%> <!--for문으로 위에서 잡은 세션을 반복해준다. (상품을 click 할때마다  세션이 잡힐수있게)  -->
+						</ul>
+					</div>
+
+
+					<table>
+						<%-- <tr>
+							<td rowspan="6"><img width="500px" height="500px"
+								src="img/<%=list.get(0).getProductPic()%>"></td>
+						</tr> --%>
+						<tr>
+							<th>상품번호</th>
+							<td><%=list.get(0).getProductNum()%></td>
+						</tr>
+						<tr>
+							<th>가격</th>
+							<td class="price"><%=list.get(0).getProductPrice()%>원</td>
+						</tr>
+						<tr>
+							<th>제품 중량</th>
+							<td><%=list.get(0).getProductWeight()%></td>
+						</tr>
+						<tr>
+							<th>원산지</th>
+							<td><%=list.get(0).getProductOrigin()%></td>
+						</tr>
+						<tr>
+							<th>구매수량</th>
+							<td>
+								<div class="length">
+									<input type="number" id="num" min="1" value="1"> 
+										<a href="#" id="ad" onclick="add()">증가</a>
+										<a href="#" id="mi" onclick="minus()">감소</a>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>결제 금액</th>
+							<td class="total">9500원</td>
+						</tr>
+					</table>
+					<div class="img">
+						<img src="img/<%=list.get(0).getProductPic()%>">
+					</div>
+					<div class="btns">
+						<a href="" class="btn1" onclick="addBasket()">장바구니</a>
+						<a href="#a" class="btn2">구매하기</a>
+					</div>
+				</div>
+			</div>
+			
+        </div>
+        <!-- footer 건들지마시오 -->
+        <jsp:include page="footer.jsp"></jsp:include>
+    </div>
+</body>
+</html>
+
+
