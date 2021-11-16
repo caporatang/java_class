@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+	<item>
+		<rank>
+			<name>kim1</name>
+			<tel>011</tel>
+		</rank>
+		<rank>
+			<name>kim2</name>
+			<tel>012</tel>
+		</rank>
+		<rank>
+			<name>kim3</name>
+			<tel>013</tel>
+		</rank>
+		<rank>
+			<name>kim4</name>
+			<tel>014</tel>
+		</rank>
+		<rank>
+			<name>kim5</name>
+			<tel>015</tel>
+		</rank>
+		<rank>
+			<name>kim6</name>
+			<tel>016</tel>
+		</rank>
+	</item>
+</result>
